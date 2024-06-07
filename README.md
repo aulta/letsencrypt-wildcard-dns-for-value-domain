@@ -4,9 +4,8 @@ Let's Encrypt でワイルドカードの証明書を取得し、DNS認証で Va
 
 ## 関連ページ
 
-無料SSL「Let’s Encrypt」でワイルドカードを設定し、ValueDomainで自動更新する
-
-[https://aulta.co.jp/technical/server-build/centos7/lets-encrypt-wildcard](https://aulta.co.jp/technical/server-build/centos7/lets-encrypt-wildcard)
+- [バリュードメインAPIドキュメント](https://www.value-domain.com/api/doc/domain/)
+- [無料SSL「Let’s Encrypt」でワイルドカードを設定し、ValueDomainで自動更新する](https://aulta.co.jp/technical/server-build/centos7/lets-encrypt-wildcard)
 
 
 ## セットアップ手順
