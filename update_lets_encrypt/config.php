@@ -19,6 +19,9 @@ $config['php_command'] = 'php';
 // ログ
 $config['log_path'] = '/var/log/update_lets_encrypt_' . date('Y') . '.log';
 
+// DNSの反映を待機する時間 (秒)
+$config['wait_for_dns_propagation'] = 130;
+
 // ドメイン
 $config['certbots'] = [];
 
@@ -52,4 +55,3 @@ $config['certbot_domains'][] = [
         'example.jp'
     ]
 ];
-
