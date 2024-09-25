@@ -43,26 +43,41 @@ foreach($config['certbots'] as $certbot) {
         continue;
     }
 
-    // 証明書の有効期限が30日以内かどうかを確認
     $need_renewal = false;
+    $is_find = false;
     $lines = explode("\n", $certificates_info);
     foreach ($lines as $line) {
-        if (strpos($line, $target_domain) !== false) {
 
-            // 次の行に有効期限が含まれている
-            $line_index = array_search($line, $lines) + 1;
-            $matches = [];
-            if (isset($lines[$line_index]) && preg_match('/VALID:.*days/i', $lines[$line_index], $matches)) {
+        if ($line === '  Certificate Name: ' . $target_domain) {
+            $is_find = true;
+            continue;
+        }
 
-                // 有効期限の日数を抽出
-                $day_match = [];
-                if (preg_match('/(\d+)\s+days/i', $matches[0], $day_match)) {
-                    $days_left = (int)$day_match[1];
-                    if ($days_left <= 30) {
-                        $need_renewal = true;
-                    }
+        if ( ! $is_find) {
+            continue;
+        }
+
+        if (substr($line, 0, 4) !== '    ') {
+            $is_find = false;
+            break;
+        }
+
+        $matches = [];
+        if (preg_match('/VALID:.*days/i', $line, $matches)) {
+
+            $day_match = [];
+            if (preg_match('/(\d+)\s+days/i', $matches[0], $day_match)) {
+                $days_left = (int)$day_match[1];
+                if ($days_left <= 30) {
+                    $need_renewal = true;
+                    break;
                 }
             }
+        }
+
+        $matches = [];
+        if (preg_match('/Expiry Date: ([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2})\+[0-9]{2}:[0-9]{2} \(INVALID: EXPIRED\)/', $line, $matches)) {
+            $need_renewal = true;
             break;
         }
     }
@@ -71,8 +86,6 @@ foreach($config['certbots'] as $certbot) {
         writeLog('証明書の更新は必要ありません (ドメイン: ' . $target_domain . ')');
         continue;
     }
-
-    continue;
 
     //
     $config_acme_challenge = [];

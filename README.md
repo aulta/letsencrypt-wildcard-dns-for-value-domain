@@ -25,6 +25,15 @@ Let's Encrypt でワイルドカードの証明書を取得し、DNS認証で Va
 
 config.php
 
+### 実行する
+
+php /root/update_lets_encrypt/execute.php
+
+### CRONに登録する
+
+crontab -e
+
+0 2 10,20,30 * * php /root/update_lets_encrypt/execute.php
 
 ## Licence
 

@@ -36,22 +36,24 @@ $config['certbots'][] = [
     ]
 ];
 
-$config['certbot_domains'][] = [
+$config['certbots'][] = [
     'execution' => true,
     'dns' => 'value_domain',
-    'mail' => 'user@example.net',
-    'domain' => 'example.net',
+    'mail' => 'user@example2.com',
+    'domain' => 'example2.com',
     'domains' => [
-        '*.example.net'
+        '*.example2.com',
+        'example2.com'
     ]
 ];
 
-$config['certbot_domains'][] = [
+$config['certbots'][] = [
     'execution' => true,
     'dns' => 'value_domain',
-    'mail' => 'user@example.jp',
-    'domain' => 'example.jp',
+    'mail' => 'user@example3.com',
+    'domain' => 'example3.com',
     'domains' => [
-        'example.jp'
+        '*.example3.com',
+        'example3.com'
     ]
 ];
